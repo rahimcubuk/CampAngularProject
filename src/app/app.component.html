@@ -1,13 +1,17 @@
 <!-- <ul>
   <li *ngFor='let product of products'> {{product.productName}} </li>
 </ul> -->
+<div class="container">
+  <app-navigator></app-navigator>
 
-<app-navigator></app-navigator>
-<app-category></app-category>
-<app-product></app-product>
+  <div class="row">
+    <div class="col-3">
+      <app-category></app-category>
+    </div>
+    <div class="col-9">
+      <app-product></app-product>
+    </div>
+  </div>
 
-Merhaba {{ user }} <br />
-
-{{ title }} Kullaniliyor! <br />
-
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>

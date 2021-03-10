@@ -1,1 +1,6 @@
-<p>category works!</p>
+<ul class="list-group" style="margin-top: 30px;">
+  <li class="list-group-item">Category Name</li>
+  <li *ngFor="let category of categories" class="list-group-item">
+    {{ category.categoryName }}
+  </li>
+</ul>

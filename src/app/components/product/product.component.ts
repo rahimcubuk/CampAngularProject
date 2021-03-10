@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product/product';
+import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
   selector: 'app-product',
@@ -6,46 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  product1: any = {
-    productId: 1,
-    productName: 'Kolonya1',
-    categoryId: '2',
-    unitPrice: 5,
-  };
-  product2: any = {
-    productId: 2,
-    productName: 'Kolonya2',
-    categoryId: '2',
-    unitPrice: 5,
-  };
-  product3: any = {
-    productId: 3,
-    productName: 'Kolonya3',
-    categoryId: '2',
-    unitPrice: 5,
-  };
-  product4: any = {
-    productId: 4,
-    productName: 'Kolonya4',
-    categoryId: '2',
-    unitPrice: 5,
-  };
-  product5: any = {
-    productId: 5,
-    productName: 'Kolonya5',
-    categoryId: '2',
-    unitPrice: 5,
-  };
+  products: Product[] = [];
+  dataLoaded = false;
+  // httpclient'i kullanmak icin enjekte etmen gerekiyor
+  constructor(private productService: ProductService) {}
 
-  products = [
-    this.product1,
-    this.product2,
-    this.product3,
-    this.product4,
-    this.product5,
-  ];
+  ngOnInit(): void {
+    console.log('init calisti');
+    this.getProducts();
+  }
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  getProducts() {
+    this.productService.getProducts().subscribe((response) => {
+      this.products = response.data;
+      this.dataLoaded = true;
+    }); //--> Bu sekilde yazilmasinin sebebi apinin asenkron calismasi
+  }
 }
