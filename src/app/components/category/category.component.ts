@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/models/category/category';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-category',
@@ -6,22 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
-  category1: any = {
-    categoryName: 'category1',
-  };
-  category2: any = {
-    categoryName: 'category2',
-  };
-  category3: any = {
-    categoryName: 'category3',
-  };
-  category4: any = {
-    categoryName: 'category4',
-  };
+  categories: Category[] = [];
+  dataLoaded = false;
+  constructor(private categoryService: CategoryService) {}
 
-  categories = [this.category1, this.category2, this.category3, this.category4];
+  ngOnInit(): void {
+    this.getCategories();
+  }
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  getCategories() {
+    this.categoryService.getCategories().subscribe((response) => {
+      this.categories = response.data;
+      this.dataLoaded = true;
+    });
+  }
 }
