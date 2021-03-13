@@ -6,9 +6,28 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<ul class="list-group" style="margin-top: 30px" *ngIf="dataLoaded != false">
-  <li class="list-group-item">CATEGORIES</li>
-  <li *ngFor="let category of categories" class="list-group-item list-group-item-info">
+<div class="list-group">
+  <div class="list-group-item">
+    <strong> CATEGORIES </strong>
+  </div>
+  <button
+    routerLink="/products"
+    type="button"
+    aria-current="true"
+    class="list-group-item list-group-item-action"
+  >
+    Get All
+  </button>
+  <button
+    *ngFor="let category of categories"
+    (click)="setCurrentCategory(category)"
+    routerLink="/products/category/{{ category.categoryId }}"
+    type="button"
+    [class]="getCurrentCategoryClass(category)"
+    aria-current="true"
+  >
     {{ category.categoryName }}
-  </li>
-</ul>
+  </button>
+</div>
+
+<h5 *ngIf="currentCategory">{{ currentCategory.categoryName }} Secili</h5>

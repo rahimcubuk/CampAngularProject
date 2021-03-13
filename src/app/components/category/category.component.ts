@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/services/category/category.service';
 })
 export class CategoryComponent implements OnInit {
   categories: Category[] = [];
+  currentCategory: Category;
   dataLoaded = false;
   constructor(private categoryService: CategoryService) {}
 
@@ -19,7 +20,18 @@ export class CategoryComponent implements OnInit {
   getCategories() {
     this.categoryService.getCategories().subscribe((response) => {
       this.categories = response.data;
-      this.dataLoaded = true;
+      this.dataLoaded = response.success;
     });
+  }
+
+  setCurrentCategory(category: Category) {
+    this.currentCategory = category;
+  }
+
+  getCurrentCategoryClass(category:Category){
+    if(category==this.currentCategory){
+      return "list-group-item list-group-item-action active"
+    }
+    return "list-group-item list-group-item-action"
   }
 }

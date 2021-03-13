@@ -9,9 +9,13 @@
 <table
   *ngIf="dataLoaded != false"
   class="table table-hover table-striped"
-  style="margin-top: 20px"
 >
   <thead>
+    <tr>
+      <th scope="col" colspan="5" style="text-align: center; background-color: azure;" > 
+        <strong>PRODUCTS</strong> 
+      </th>
+    </tr>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
@@ -24,7 +28,7 @@
     <tr *ngFor="let product of products">
       <th scope="row">{{ product.productId }}</th>
       <td>{{ product.productName }}</td>
-      <td>{{ product.categoryId }}</td>
+      <td>{{ product.categoryName }}</td>
       <td>{{ product.unitPrice }}</td>
       <td>{{ product.unitsInStock }}</td>
     </tr>
