@@ -1,0 +1,23 @@
+<!-- *ngIf="cartItems"  -->
+<div *ngIf="cartItems" class="nav-item dropdown">
+  <a
+    class="nav-link dropdown-toggle"
+    id="navbarDropdown"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <img src="/assets/img/cart_icon.png" width="35" height="35" />
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li *ngFor="let cartItem of cartItems">
+      <a class="dropdown-item">
+        <span class="badge bg-secondary"> {{cartItem.quantity}} </span>
+        {{ cartItem.product.productName }}
+        <button (click)="removeFromCart(cartItem.product)" class="badge bg-danger">Sil</button> 
+      </a> 
+    </li>
+    <li><hr class="dropdown-divider" /></li>
+    <li><a class="dropdown-item">Cart Summary</a></li>
+  </ul>
+</div>

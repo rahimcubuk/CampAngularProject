@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product/product';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
@@ -11,10 +13,13 @@ import { ProductService } from 'src/app/services/product/product.service';
 export class ProductComponent implements OnInit {
   products: Product[] = [];
   dataLoaded = false;
+  filterText = '';
   // httpclient'i kullanmak icin enjekte etmen gerekiyor
   constructor(
     private productService: ProductService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cartService: CartService,
+    private toastrService: ToastrService
   ) {}
 
   // Bir metot observable donduruyorsa subscribe olmaliyiz
@@ -43,5 +48,14 @@ export class ProductComponent implements OnInit {
         this.products = response.data;
         this.dataLoaded = response.success;
       }); //--> Bu sekilde yazilmasinin sebebi apinin asenkron calismasi
+  }
+
+  addToCart(data: Product) {
+    this.toastrService.success('Added To Cart', data.productName);
+    this.cartService.addToCart(data);
+  }
+
+  addToFav(data: Product) {
+    this.toastrService.success('Added To Favorite', data.productName);
   }
 }
