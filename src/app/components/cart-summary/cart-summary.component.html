@@ -1,21 +1,35 @@
 <!-- *ngIf="cartItems"  -->
 <div *ngIf="cartItems" class="nav-item dropdown">
-  <a
+  <div
     class="nav-link dropdown-toggle"
     id="navbarDropdown"
     role="button"
     data-bs-toggle="dropdown"
     aria-expanded="false"
+    style="
+      border-radius: 40px 0px 0px 40px;
+      background-color: rgba(161, 39, 30, 0.65);
+      width: 130px;
+    "
   >
-    <img src="/assets/img/cart_icon.png" width="35" height="35" />
-  </a>
+    <strong> CART </strong>
+    <img src="/assets/img/cart_icon.png" width="25" height="25" />
+  </div>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <li *ngFor="let cartItem of cartItems">
       <a class="dropdown-item">
-        <span class="badge bg-secondary"> {{cartItem.quantity}} </span>
-        {{ cartItem.product.productName }}
-        <button (click)="removeFromCart(cartItem.product)" class="badge bg-danger">Sil</button> 
-      </a> 
+          <div class="row">
+            <div class="col-6">
+                <span class="badge bg-success" style=" font-size: 19px;"> {{ cartItem.quantity }} {{ cartItem.product.productName }} </span>
+            </div>
+            <div class="col-6">
+                <div class="btn-group me-2  btn-group-sm" role="group" aria-label="First group">
+                    <button (click)="removeFromCart(cartItem.product)" type="button" class="btn btn-primary">+</button>
+                    <button (click)="removeFromCart(cartItem.product)" type="button" class="btn btn-danger">-</button>
+                  </div>
+            </div>
+          </div>
+      </a>
     </li>
     <li><hr class="dropdown-divider" /></li>
     <li><a class="dropdown-item">Cart Summary</a></li>
