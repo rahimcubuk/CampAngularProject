@@ -25,6 +25,15 @@ export class ProductAddComponent implements OnInit {
     this.createProductAddForm();
   }
 
+  createProductAddForm() {
+    this.productAddForm = this.formBuilder.group({
+      productName: ['', Validators.required],
+      unitPrice: ['', Validators.required],
+      unitsInStock: ['', Validators.required],
+      categoryId: ['', Validators.required],
+    });
+  }
+
   add() {
     if (this.productAddForm.valid) {
       let productModel = Object.assign({}, this.productAddForm.value);
@@ -50,14 +59,5 @@ export class ProductAddComponent implements OnInit {
     } else {
       this.toastrService.error('Please check your values', 'Error!');
     }
-  }
-
-  createProductAddForm() {
-    this.productAddForm = this.formBuilder.group({
-      productName: ['', Validators.required],
-      unitPrice: ['', Validators.required],
-      unitsInStock: ['', Validators.required],
-      categoryId: ['', Validators.required],
-    });
   }
 }
